@@ -95,7 +95,7 @@ function saveBtn_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 ima=getimage(handles.axes1);
-imwrite(ima,'saved.jpg');
+imwrite(ima,'saved.png');
 msgbox('Image saved successfully!', 'SUCCESS', 'custom', ima);
 
 % --- Executes on button press in cropBtn.
@@ -131,24 +131,28 @@ global im
 i = getimage(handles.axes1);
 str = get(hObject, 'String');
 val = get(hObject, 'Value');
-
 switch str{val}
     case 'FLIP ORIG'
         imshow(im, 'Parent', handles.axes1);
         image=im;
     case 'FLIP 45'
         x = imrotate(i,45,'loose','bilinear');
+        x1 = ~imrotate(true(size(i)),45,'loose','bilinear');
+        x(x1&~imclearborder(x1)) = 255;
         imshow(x,'Parent',handles.axes1);
         image=x;
     case 'FLIP 90'
         x = imrotate(i,90,'loose','bilinear');
+        x1 = ~imrotate(true(size(i)),90,'loose','bilinear');
+        x(x1&~imclearborder(x1)) = 255;
         imshow(x,'Parent',handles.axes1);
-        image=im;
+        image=x;
     case 'FLIP 180'
         x = imrotate(i,180,'loose','bilinear');
-        y = ~imrotate(true(size(img),45,'b'))
-        imshow(y,'Parent',handles.axes1);
-        image=im;
+        x1 = ~imrotate(true(size(i)),180,'loose','bilinear');
+        x(x1&~imclearborder(x1)) = 255;
+        imshow(x,'Parent',handles.axes1);
+        image=x;
 end
 
 % --- Executes during object creation, after setting all properties.
