@@ -133,8 +133,9 @@ str = get(hObject, 'String');
 val = get(hObject, 'Value');
 switch str{val}
     case 'FLIP ORIG'
-        imshow(im, 'Parent', handles.axes1);
-        image=im;
+        x=im;
+        imshow(x, 'Parent', handles.axes1);
+        image=x;
     case 'FLIP 45'
         x = imrotate(i,45,'loose','bilinear');
         x1 = ~imrotate(true(size(i)),45,'loose','bilinear');
